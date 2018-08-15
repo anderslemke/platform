@@ -1,49 +1,106 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Event Sourcing</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/zetland.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-transition="none">
+          <h1>My first talk about Event Sourcing</h1>
+          <p>
+            by Anders Lemke<br /> Lead Developer @ Zetland
+          </p>
+        </section>
+        <section>
+          <h1>Event Sourcing<span class="fragment">?</span></h1>
+          <p class="fragment">
+            The <strong>authoritative source of truth</strong> is an <br /><strong>append-only stream</strong> of <strong>immutable events</strong>
+          </p>
+        </section>
+        <section>
+          <ol>
+            <li>This happened</li>
+            <li>then, this happened</li>
+            <li>then, this happened</li>
+            <li>...</li>
+          </ol>
+        </section>
+        <section>
+          <pre><code>
+            class StoryPublished < DomainEvent
+              attribute :story_content, Hash
+              attribute :story_id,      String
+              attribute :user_id,       String
+            end
+          </code></pre>
+        </section>
+        <section>
+          <h1>So, what happens?</h1>
+        </section>
+        <section>
+          <section>
+            <p>
+              The event will be <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded contexts</strong>
+            </p>
+          </section>
+          <section>
+            <h1>Bounded context</h1>
+          </section>
+        </section>
+        <section class="left">
+          <p style="text-align:left;">
+            👩‍💻 A row for readers
+            <br /><br />
+            📒 A row for internal reporting
+            <br /><br />
+            🏞 A row for discovery
+            <br /><br />
+            💥 Bust the cache for that story
+          </p>
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        controls: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        transitionSpeed: 'slow',
+        history: true,
+        fragmentInURL: true,
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
