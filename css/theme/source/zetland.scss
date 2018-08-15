@@ -1,0 +1,85 @@
+/**
+ * White theme for reveal.js. This is the opposite of the 'black' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/italian/fonts.css);
+
+/* ################## New colors -> platform redesign ################## */
+// Primary
+$color-orange:           #FA4113; // "Z-orange"
+$color-orange-lighter-1: #FB704F;
+$color-orange-lighter-2: #FDA089;
+$color-orange-lighter-3: #FED0C4;
+
+// Secondary
+$color-nightblue: #203b62; // "Natblå"
+$color-oceanblue: #659ee0; // "Havblå" "Helikopter"
+
+// Tertiary
+$color-copenhagengreen: #06592f; // "Københavnergrøn"
+$color-rosa: #ebc7d8; // "Rosa"
+$color-yellow: #ffffac; // "Gul"
+$color-preusserblue: #47729c; // "Preusserblå"
+$color-greyblue: #8abcd9; // "Gråblå"
+$color-turquoise: #71c9f1; // "Turkis"
+$color-arbejdsrum: $color-greyblue; // Blå
+
+// Periphery
+$color-green: #25bbb0; // "Ja-tak grøn"
+$color-beige: #baae95;
+
+// Kickstarter
+$color-mustard: #F5CC5B; // "Glad gul"
+$color-bandaid: #E8C7B6; // "Hæfteplaster"
+$color-brick: #E0704E; // "Teglsten"
+
+// Basis
+$color-blackish: #231f20; // "Sort. Til mindre tekster"
+$color-article-background: #FAF8F0; // "Papirfarve - kun til artikelbaggrund"
+
+$color-darkgrey: #727781; // "Mørkegrå"
+$color-mediumgrey: #d9d9d9; // "Mellemgrå"
+$color-lightgrey: #f3f3f3; // "Lysegrå"
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: $color-orange;
+$headingColor: $color-orange;
+
+$mainFontSize: 42px;
+$mainFont: 'Italian Plate No2', Helvetica, sans-serif;
+$headingFont: 'Italian Plate No2', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: $color-orange;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+section.has-dark-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #fff;
+	}
+}
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------

@@ -1,0 +1,205 @@
+/*
+ * Playtype Foundry — 2016
+ * Legal Disclaimer
+ *
+ * These webfonts are licensed only for use on these domains and their subdomains:
+ * zetland.dk
+ *
+ * It is illegal to download or use them on other websites.
+ *
+ */
+
+/* Italian Plate No2 */
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Tn.eot');
+    src:    url('ItalianPlateNo2-Tn.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Tn.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-TnIt.eot');
+    src:    url('ItalianPlateNo2-TnIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-TnIt.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-XLt.eot');
+    src:    url('ItalianPlateNo2-XLt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-XLt.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-XLtIt.eot');
+    src:    url('ItalianPlateNo2-XLtIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-XLtIt.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Lt.eot');
+    src:    url('ItalianPlateNo2-Lt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Lt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-LtIt.eot');
+    src:    url('ItalianPlateNo2-LtIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-LtIt.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Rg.eot');
+    src:    url('ItalianPlateNo2-Rg.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Rg.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-It.eot');
+    src:    url('ItalianPlateNo2-It.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-It.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Md.eot');
+    src:    url('ItalianPlateNo2-Md.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Md.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-MdIt.eot');
+    src:    url('ItalianPlateNo2-MdIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-MdIt.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-DBd.eot');
+    src:    url('ItalianPlateNo2-DBd.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-DBd.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-DBdIt.eot');
+    src:    url('ItalianPlateNo2-DBdIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-DBdIt.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Bd.eot');
+    src:    url('ItalianPlateNo2-Bd.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Bd.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-BdIt.eot');
+    src:    url('ItalianPlateNo2-BdIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-BdIt.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-XBd.eot');
+    src:    url('ItalianPlateNo2-XBd.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-XBd.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-XBdIt.eot');
+    src:    url('ItalianPlateNo2-XBdIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-XBdIt.woff') format('woff');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-Blk.eot');
+    src:    url('ItalianPlateNo2-Blk.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-Blk.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2';
+    src:    url('ItalianPlateNo2-BlkIt.eot');
+    src:    url('ItalianPlateNo2-BlkIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-BlkIt.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+}
+
+/* Special weights with unique font names – due to CSS font-weight limitations */
+/* Ultra Light */
+@font-face {
+    font-family: 'Italian Plate No2 Ultra Light';
+    src:    url('ItalianPlateNo2-ULt.eot');
+    src:    url('ItalianPlateNo2-ULt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-ULt.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Italian Plate No2 Ultra Light';
+    src:    url('ItalianPlateNo2-ULtIt.eot');
+    src:    url('ItalianPlateNo2-ULtIt.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-ULtIt.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+}
+
+/* Black Left */
+@font-face {
+    font-family: 'Italian Plate No2 Black Left';
+    src:    url('ItalianPlateNo2-BlkL.eot');
+    src:    url('ItalianPlateNo2-BlkL.eot?#iefix') format('embedded-opentype'),
+            url('ItalianPlateNo2-BlkL.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
