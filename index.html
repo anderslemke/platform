@@ -59,7 +59,7 @@
         <section>
           <section>
             <p>
-              The event will be <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded contexts</strong>
+              The event will be <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded context</strong>
             </p>
           </section>
           <section>
@@ -67,15 +67,98 @@
           </section>
         </section>
         <section class="left">
-          <p style="text-align:left;">
-            👩‍💻 A row for readers
+          <p style="">
+            A row for readers 👩‍💻 
             <br /><br />
-            📒 A row for internal reporting
+            A row for internal reporting 📒
             <br /><br />
-            🏞 A row for discovery
+            A row for discovery 🏞
             <br /><br />
-            💥 Bust the cache for that story
+            Invalidate the cache for that story 💥
           </p>
+        </section>
+        <section>
+          <h1>But why?</h1>
+          <p class="fragment">When this will require a new way of thinking 🤯</p>
+        </section>
+        <section>
+          <strong>Behaviour</strong> over structure
+        </section>
+        <section>
+          Design the <strong>simplest</strong> thing that could possibly work
+        </section>
+        <section>
+          <section>
+            Ubiquitous Language
+          </section>
+          <section>
+            <pre><code>
+  class MembershipActivatedMoreThanOnceNotificationCreated
+    attribute :user_id, String
+    attribute :count, Integer
+    attribute :activators, Array
+  end
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            Decouple data change from data usage
+          </section>
+          <section>
+            <h1>Example</h1>
+            <p>
+              Internal reporting of memberships
+            </p>
+            <p>
+              I basically made an error, making reactivations not count
+            </p>
+            <p>
+              But we have all events stored
+            </p>
+            <p>
+              So we can easily replay those, hence, fixing the reporting error
+            </p>
+          </section>
+        </section>
+        <section data-transition="zoom-in slide-out">
+          <span style="font-size:300%">🤯</span>
+        </section>
+        <section data-transition="zoom-in convex-out">
+          <span style="font-size:300%">😌</span>
+        </section>
+        <section>
+          <h1>But how?</h1>
+        </section>
+        <section>
+          <p>
+            <img class="plain logo" src="/graphic/zetland.jpg" />
+          </p>
+          <p>❤️</p>
+          <p>
+            <img class="plain third-party-logo" src="/graphic/elephant.png" />
+          </p>
+          <p>
+            <img class="plain third-party-logo" src="/graphic/RabbitMQ-logo.svg" />
+          </p>
+          <p>
+            <img class="plain third-party-logo" src="/graphic/ruby.png" />
+          </p>
+          <p>
+            <img class="plain third-party-logo" src="/graphic/rails-logo.svg" />
+          </p>
+        </section>
+        <section>
+          <h4>Namedropping</h4>
+          <ul>
+            <li><strong>Eric Evans</strong></li>
+            <li><strong>Greg Young</strong></li>
+            <li>Design Driven Development</li>
+            <li>Bounded context</li>
+            <li>CQRS</li>
+            <li>Eventual consistency</li>
+            <li>Ubiquitous Language</li>
+          </ul>
         </section>
       </div>
     </div>
@@ -88,6 +171,7 @@
       // - https://github.com/hakimel/reveal.js#configuration
       // - https://github.com/hakimel/reveal.js#dependencies
       Reveal.initialize({
+        slideNumber: true,
         controls: false,
         // Transition style
         transition: 'fade', // none/fade/slide/convex/concave/zoom
