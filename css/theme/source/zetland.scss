@@ -51,10 +51,12 @@ $color-darkgrey: #727781; // "Mørkegrå"
 $color-mediumgrey: #d9d9d9; // "Mellemgrå"
 $color-lightgrey: #f3f3f3; // "Lysegrå"
 
+$color-dark-text : #333333;
+
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #fff;
 
-$mainColor: $color-orange;
+$mainColor: $color-dark-text;
 $headingColor: $color-orange;
 
 $mainFontSize: 42px;
@@ -79,14 +81,25 @@ section.has-dark-background {
 	}
 }
 
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
 .logo {
 	height: 2em;
 }
 .third-party-logo {
 	height: 1em;
 }
+.small {
+	height: 1em;
+}
 
+strong {
+	color: $color-orange;
+}
 
-// Theme template ------------------------------
-@import "../template/theme";
-// ---------------------------------------------
+a {
+	text-decoration: underline !important;
+}

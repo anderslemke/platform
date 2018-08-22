@@ -8,12 +8,6 @@
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
 
-.logo {
-  height: 2em; }
-
-.third-party-logo {
-  height: 1em; }
-
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -25,7 +19,7 @@ body {
   font-family: "Italian Plate No2", Helvetica, sans-serif;
   font-size: 42px;
   font-weight: normal;
-  color: #FA4113; }
+  color: #333333; }
 
 ::selection {
   color: #fff;
@@ -237,7 +231,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #FA4113;
+  border: 4px solid #333333;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 .reveal section img.plain {
@@ -278,3 +272,18 @@ body {
 @media print {
   .backgrounds {
     background-color: #fff; } }
+
+.logo {
+  height: 2em; }
+
+.third-party-logo {
+  height: 1em; }
+
+.small {
+  height: 1em; }
+
+strong {
+  color: #FA4113; }
+
+a {
+  text-decoration: underline !important; }

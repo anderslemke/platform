@@ -12,6 +12,8 @@
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
+    <link rel="stylesheet" href="lib/css/tailwind.min.css">
+
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
@@ -25,13 +27,25 @@
     <div class="reveal">
       <div class="slides">
         <section data-transition="none">
-          <h1>My first talk about Event Sourcing</h1>
-          <p>
-            by Anders Lemke<br /> Lead Developer @ Zetland
+          <h2>The platform at Zetland</h2>
+          <p>Applied Event Sourcing, Domain Driven Design and CQRS</p>
+          <p class="text-grey text-2xl font-thin pt-12">
+            by Anders Lemke <br/>
+            Lead Developer at Zetland
           </p>
         </section>
         <section>
-          <h1>Event Sourcing<span class="fragment">?</span></h1>
+          <h3>Have you ever</h3>
+          <ul>
+            <li>had discrepancy in code concepts and business concepts?</li>
+            <li>overengineered (what turned out to be) simple concepts?</li>
+            <li>deleted data on a production system by accident because of unforseen side effects?</li>
+            <li>struggled with performance of tables that did too much?</li>
+          </ul>
+          <h3 class="fragment pt-10">Me neither! 😇</h3>
+        </section>
+        <section>
+          <h1 class="fragment">Event Sourcing<span class="fragment">?</span></h1>
           <p class="fragment">
             The <strong>authoritative source of truth</strong> is an <br /><strong>append-only stream</strong> of <strong>immutable events</strong>
           </p>
@@ -59,15 +73,29 @@
         <section>
           <section>
             <p>
-              The event will be <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded context</strong>
+              The event is <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded context</strong>
             </p>
           </section>
           <section>
-            <h1>Bounded context</h1>
+            <h3 class="flex items-center justify-center">
+              <span>
+                Bounded contexts at
+              </span>
+              <img class="plain h-16 pl-6" src="/graphic/zetland.jpg" />
+            </h3>
+            <ul>
+              <li>Editor</li>
+              <li>Consume</li>
+              <li>Subscription</li>
+              <li>Internal reporting</li>
+              <li>Discover</li>
+            </ul>
           </section>
         </section>
-        <section class="left">
-          <p style="">
+        <section>
+          <p>
+            A row for the news room 🖋
+            <br /><br />
             A row for readers 👩‍💻 
             <br /><br />
             A row for internal reporting 📒
@@ -76,6 +104,19 @@
             <br /><br />
             Invalidate the cache for that story 💥
           </p>
+        </section>
+        <section>
+          <p>
+            A row for readers 👩‍💻 
+          </p>
+          <pre><code>
+        when StoryPublished
+          story = Story.find_or_create(event.story_id)
+          story.story_content = event.story_content
+          story.published_at ||= event.published_at
+          story.revised_at = event.event_published_at
+          story.save
+          </code></pre>
         </section>
         <section>
           <h1>But why?</h1>
@@ -89,7 +130,7 @@
         </section>
         <section>
           <section>
-            Ubiquitous Language
+            <strong>Ubiquitous Language</strong>
           </section>
           <section>
             <pre><code>
@@ -103,7 +144,7 @@
         </section>
         <section>
           <section>
-            Decouple data change from data usage
+            <strong>Decouple</strong> data change from data usage (CQRS)
           </section>
           <section>
             <h1>Example</h1>
@@ -124,41 +165,65 @@
         <section data-transition="zoom-in slide-out">
           <span style="font-size:300%">🤯</span>
         </section>
-        <section data-transition="zoom-in convex-out">
+        <section data-transition="zoom-in slide-out">
           <span style="font-size:300%">😌</span>
         </section>
         <section>
           <h1>But how?</h1>
         </section>
         <section>
-          <p>
+          <div style="display:flex;justify-content:space-evenly;align-items:center;">
             <img class="plain logo" src="/graphic/zetland.jpg" />
-          </p>
-          <p>❤️</p>
-          <p>
-            <img class="plain third-party-logo" src="/graphic/elephant.png" />
-          </p>
-          <p>
-            <img class="plain third-party-logo" src="/graphic/RabbitMQ-logo.svg" />
-          </p>
-          <p>
-            <img class="plain third-party-logo" src="/graphic/ruby.png" />
-          </p>
-          <p>
-            <img class="plain third-party-logo" src="/graphic/rails-logo.svg" />
-          </p>
+            <span>❤️</span>
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;">
+              <img class="plain third-party-logo" src="/graphic/elephant.png" />
+              <img class="plain third-party-logo" src="/graphic/RabbitMQ-logo.svg" />
+              <img class="plain third-party-logo" src="/graphic/ruby.png" />
+              <img class="plain third-party-logo" src="/graphic/rails-logo.svg" />
+            </div>
+          </div>
         </section>
         <section>
-          <h4>Namedropping</h4>
+          <h4>Challenges</h4>
+          <ul>
+            <li>Added complexity at high level</li>
+            <li>Write some new Rails generators</li>
+            <li>Quite a lot of moving parts</li>
+            <li>Relearn to design software</li>
+            <li>Eventual consistency</li>
+            <li>Evolving events over time</li>
+          </ul>
+        </section>
+        <section>
+          <h4>Standing on the shoulders of</h4>
           <ul>
             <li><strong>Eric Evans</strong></li>
+            <ul>
+              <li>Design Driven Development</li>
+              <ul>
+                <li class="text-grey">Bounded context</li>
+                <li class="text-grey">Ubiquitous Language</li>
+              </ul>
+            </ul>
             <li><strong>Greg Young</strong></li>
-            <li>Design Driven Development</li>
-            <li>Bounded context</li>
-            <li>CQRS</li>
-            <li>Eventual consistency</li>
-            <li>Ubiquitous Language</li>
+            <ul>
+              <li>Event Sourcing</li>
+              <li>CQRS</li>
+            </ul>
           </ul>
+        </section>
+        <section>
+          <h4>Read</h4>
+          <ul>
+            <li><a href="https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/">Turning the database inside-out with Apache Samza</a> by <a href="https://www.confluent.io/blog/author/martin-kleppmann/">Martin Klepmann</a> </li>
+          </ul>
+
+        </section>
+        <section>
+          <h1>Questions 🤗</h1>
+        </section>
+        <section>
+          <h1>Thank you 🤗</h1>
         </section>
       </div>
     </div>
