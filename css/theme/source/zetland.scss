@@ -103,3 +103,15 @@ strong {
 a {
 	text-decoration: underline !important;
 }
+
+.es {
+	color: $color-oceanblue !important;
+}
+
+.ddd {
+	color: lighten($color-copenhagengreen, 10%) !important;
+}
+
+.cqrs {
+	color: darken($color-mustard, 15%) !important;
+}

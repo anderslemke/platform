@@ -28,7 +28,7 @@
       <div class="slides">
         <section data-transition="none">
           <h2>The platform at Zetland</h2>
-          <p>Applied Event Sourcing, Domain Driven Design and CQRS</p>
+          <p>Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain Driven Design</span> and <span class="cqrs">CQRS</span></p>
           <p class="text-grey text-2xl font-thin pt-12">
             by Anders Lemke <br/>
             Lead Developer at Zetland
@@ -37,16 +37,16 @@
         <section>
           <h3>Have you ever</h3>
           <ul>
-            <li>felt discrepancy in code concepts and business concepts?</li>
-            <li>built the database schema before the user experience?</li>
-            <li>overengineered (what turned out to be) simple concepts?</li>
-            <li>deleted data on a production system by accident because of unforseen side effects?</li>
-            <li>struggled with performance of tables that did too much?</li>
+            <li>felt <strong>discrepancy</strong> in code concepts and business concepts?</li>
+            <li class="fragment">built the database schema <strong>before</strong> the user experience?</li>
+            <li class="fragment"><strong>overengineered</strong> (what turned out to be) simple concepts?</li>
+            <li class="fragment">deleted data on a production system by accident because of <strong>unforseen side effects</strong>?</li>
+            <li class="fragment">struggled with performance of <strong>tables that did too much</strong>?</li>
           </ul>
           <h3 class="fragment pt-10">Me neither! 😇</h3>
         </section>
         <section>
-          <h1 class="fragment">Event Sourcing<span class="fragment">?</span></h1>
+          <h1 class="fragment es">Event Sourcing<span class="fragment">?</span></h1>
           <p class="fragment">
             The <strong>authoritative source of truth</strong> is an <br /><strong>append-only stream</strong> of <strong>immutable events</strong>
           </p>
@@ -62,9 +62,9 @@
         <section>
           <pre><code>
             class StoryPublished < DomainEvent
-              attribute :story_content, Hash
-              attribute :story_id,      String
-              attribute :user_id,       String
+              attribute :story_content
+              attribute :story_id
+              attribute :user_id
             end
           </code></pre>
         </section>
@@ -74,37 +74,27 @@
         <section>
           <section>
             <p>
-              The event is <strong>saved in our event store</strong>,<br/> then <strong>broadcasted to every bounded context</strong>
+              The event is <strong>saved in our <span class="es">event store</span></strong>,<br/> then <strong>broadcasted to every <span class="ddd">bounded context</span></strong>
             </p>
           </section>
           <section>
-            <h3 class="flex items-center justify-center">
-              <span>
-                Bounded contexts at
-              </span>
-              <img class="plain h-16 pl-6" src="/graphic/zetland.jpg" />
-            </h3>
-            <ul>
-              <li>Editor</li>
-              <li>Consume</li>
-              <li>Subscription</li>
-              <li>Internal reporting</li>
-              <li>Discover</li>
-            </ul>
+            <img src="/graphic/overview.svg" class="plain" />
           </section>
         </section>
         <section>
-          <p>
-            A row for the news room 🖋
-            <br /><br />
-            A row for readers 👩‍💻 
-            <br /><br />
-            A row for internal reporting 📒
-            <br /><br />
-            A row for discovery 🏞
-            <br /><br />
-            Invalidate the cache for that story 💥
-          </p>
+          <div class="flex items-center content-center justify-center">
+            <div class="text-left">
+              ✍️ A row for the news room
+              <br /><br />
+              👩‍💻 A row for readers
+              <br /><br />
+              📒 A row for internal reporting
+              <br /><br />
+              🏞 A row for discovery
+              <br /><br />
+              💥 Invalidate the cache for that story
+            </div>
+          </div>
         </section>
         <section>
           <p>
@@ -131,36 +121,21 @@
         </section>
         <section>
           <section>
-            <strong>Ubiquitous Language</strong>
+            <strong class="ddd">Ubiquitous Language</strong>
           </section>
           <section>
             <pre><code>
   class MembershipActivatedMoreThanOnceNotificationCreated
-    attribute :user_id, String
-    attribute :count, Integer
-    attribute :activators, Array
+    attribute :user_id
+    attribute :count
+    attribute :activators
   end
             </code></pre>
           </section>
         </section>
         <section>
           <section>
-            <strong>Decouple</strong> data change from data usage (CQRS)
-          </section>
-          <section>
-            <h1>Example</h1>
-            <p>
-              Internal reporting of memberships
-            </p>
-            <p>
-              I basically made an error, making reactivations not count
-            </p>
-            <p>
-              But we have all events stored
-            </p>
-            <p>
-              So we can easily replay those, hence, fixing the reporting error
-            </p>
+            <strong class="cqrs">Decouple</strong> data change from data usage
           </section>
         </section>
         <section data-transition="zoom-in slide-out">
@@ -185,6 +160,9 @@
           </div>
         </section>
         <section>
+          <img src="/graphic/overview.svg" class="plain" />
+        </section>
+        <section>
           <h4>Challenges</h4>
           <ul>
             <li>Added complexity at high level</li>
@@ -200,7 +178,7 @@
           <ul>
             <li><strong>Eric Evans</strong></li>
             <ul>
-              <li>Design Driven Development</li>
+              <li class="ddd">Design Driven Development</li>
               <ul>
                 <li class="text-grey">Bounded context</li>
                 <li class="text-grey">Ubiquitous Language</li>
@@ -208,8 +186,8 @@
             </ul>
             <li><strong>Greg Young</strong></li>
             <ul>
-              <li>Event Sourcing</li>
-              <li>CQRS</li>
+              <li class="es">Event Sourcing</li>
+              <li class="cqrs">CQRS</li>
             </ul>
           </ul>
         </section>
