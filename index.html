@@ -6,13 +6,14 @@
 
     <title>Event Sourcing</title>
 
+    <link rel="stylesheet" href="lib/css/tailwind.min.css">
+
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/zetland.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
-    <link rel="stylesheet" href="lib/css/tailwind.min.css">
 
     <!-- Printing and PDF exports -->
     <script>
@@ -29,7 +30,7 @@
         <section data-transition="none">
           <h2>The platform at Zetland</h2>
           <p>Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain Driven Design</span> and <span class="cqrs">CQRS</span></p>
-          <p class="text-grey text-2xl font-thin pt-12">
+          <p class="text-grey text-xs font-thin pt-6">
             by Anders Lemke <br/>
             Lead Developer at Zetland
           </p>
@@ -43,7 +44,7 @@
             <li class="fragment">deleted data on a production system by accident because of <strong>unforseen side effects</strong>?</li>
             <li class="fragment">struggled with performance of <strong>tables that did too much</strong>?</li>
           </ul>
-          <h3 class="fragment pt-10">Me neither! 😇</h3>
+          <h3 class="fragment pt-4">Me neither! 😇</h3>
         </section>
         <section>
           <h1 class="fragment es">Event Sourcing<span class="fragment">?</span></h1>
@@ -61,11 +62,11 @@
         </section>
         <section>
           <pre><code>
-            class StoryPublished < DomainEvent
-              attribute :story_content
-              attribute :story_id
-              attribute :user_id
-            end
+          class Editor::StoryPublished < DomainEvent
+            attribute :story_content
+            attribute :story_id
+            attribute :user_id
+          end
           </code></pre>
         </section>
         <section>
@@ -84,13 +85,13 @@
         <section>
           <div class="flex items-center content-center justify-center">
             <div class="text-left">
-              ✍️ A row for the news room
+              ✍️ A row for the news room <span class="text-xs ddd opacity-50">(Editor)</span>
               <br /><br />
-              👩‍💻 A row for readers
+              👩‍💻 A row for readers <span class="text-xs ddd opacity-50">(Consume)</span>
               <br /><br />
-              📒 A row for internal reporting
+              📒 A row for internal reporting <span class="text-xs ddd opacity-50">(Internal reporting)</span>
               <br /><br />
-              🏞 A row for discovery
+              🏞 A row for discovery <span class="text-xs ddd opacity-50">(Discover)</span>
               <br /><br />
               💥 Invalidate the cache for that story
             </div>
@@ -98,15 +99,15 @@
         </section>
         <section>
           <p>
-            A row for readers 👩‍💻 
+            Example: A row for readers 👩‍💻 
           </p>
           <pre><code>
-        when StoryPublished
-          story = Story.find_or_create(event.story_id)
-          story.story_content = event.story_content
-          story.published_at ||= event.published_at
-          story.revised_at = event.event_published_at
-          story.save
+    when Editor::StoryPublished
+      story = Consume::Story.find_or_create(event.story_id)
+      story.story_content = event.story_content
+      story.published_at ||= event.published_at
+      story.revised_at = event.event_published_at
+      story.save
           </code></pre>
         </section>
         <section>
