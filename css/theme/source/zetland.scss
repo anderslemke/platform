@@ -108,6 +108,10 @@ a {
 	color: $color-oceanblue !important;
 }
 
+.storm {
+	color: darken($color-oceanblue, 20%) !important;
+}
+
 .ddd {
 	color: lighten($color-copenhagengreen, 10%) !important;
 }
