@@ -70,10 +70,10 @@ $linkColor: $color-orange;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
 
-$heading1Size: 2.5em;
-$heading2Size: 1.6em;
-$heading3Size: 1.3em;
-$heading4Size: 1.0em;
+$heading1Size: 2.5rem;
+$heading2Size: 1.6rem;
+$heading3Size: 1.3rem;
+$heading4Size: 1.0rem;
 
 section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
@@ -87,13 +87,10 @@ section.has-dark-background {
 // ---------------------------------------------
 
 .logo {
-	height: 2em;
+	height: 2rem;
 }
 .third-party-logo {
-	height: 1em;
-}
-.small {
-	height: 1em;
+	height: 1rem;
 }
 
 strong {
