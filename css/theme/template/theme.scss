@@ -307,7 +307,7 @@ section img {
 
 .progress {
 	background: rgba(0,0,0,0.2);
-	color: $linkColor;
+	color: $linkColor !important;
 }
 	.progress span {
 		-webkit-transition: width 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
