@@ -27,24 +27,98 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section data-transition="none">
-          <h2>The platform at Zetland</h2>
-          <p>Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain Driven Design</span> and <span class="cqrs">CQRS</span></p>
-          <p class="text-grey text-xs font-thin pt-6">
+        <section>
+          <img class="plain logo mb-8" src="graphic/zetland.jpg" />
+          <h1 class="pb-0 mb-0">Events on Rails</h1>
+          <p class="text-xs pt-0 mt-0">Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain Driven Design</span> and <span class="cqrs">CQRS</span></p>
+          <p class="text-grey text-xs font-thin mt-8">
             by Anders Lemke <br/>
             Lead Developer at Zetland
           </p>
+          <aside data-markdown class="notes">
+            Goals:
+            1. Inspire
+            2. Motivate
+          </aside>
         </section>
         <section>
           <h3>Have you ever</h3>
           <ul>
             <li class="fragment">felt <strong>discrepancy</strong> in code concepts and business concepts?</li>
-            <li class="fragment">built the database schema <strong>before</strong> the user experience?</li>
+            <li class="fragment">built the <strong>database schema</strong> before the user experience?</li>
             <li class="fragment"><strong>overengineered</strong> (what turned out to be) simple concepts?</li>
             <li class="fragment">deleted data on a production system by accident because of <strong>unforseen side effects</strong>?</li>
             <li class="fragment">struggled with performance of <strong>tables that did too much</strong>?</li>
           </ul>
-          <h3 class="fragment pt-4">Me neither! 😇</h3>
+          <h3 class="fragment pt-4">Yeah, me neither! 😇</h3>
+        </section>
+        <section>
+          <p class="fragment text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
+          <h1 class="fragment">Events are key</h1>
+          <aside data-markdown class="notes">
+            Searched
+
+            Events
+
+            Confuse
+          </aside>
+        </section>
+        <section>
+          <h1>But why?</h1>
+        </section>
+        <section data-transition="zoom-in slide-out">
+          <h1 style="font-size:300%">🤯</h1>
+        </section>
+        <section>
+        </section>
+        <section>
+          Only design <strong>simple facts</strong>
+        </section>
+        <section>
+          <pre><code>
+        class Editor::StoryPublished < DomainEvent
+          attribute :story_content
+          attribute :story_id
+          attribute :user_id
+        end
+          </code></pre>
+        </section>
+        <section>
+          <strong>Behaviour</strong> over structure
+          <aside data-markdown class="notes">
+            Example with warehouse
+          </aside>
+        </section>
+        <section>
+          <section>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+            <aside data-markdown class="notes">
+              Internal reporting that was wrong in counting reactivations
+            </aside>
+          </section>
+        </section>
+        <section>
+          <strong class="ddd fragment">Ubiquitous Language</strong>
+          <aside data-markdown class="notes">
+            Agile
+
+            Example that requires a bit domain knowledge
+          </aside>
+        </section>
+        <section>
+          <pre><code>
+  class MembershipActivatedMoreThanOnceNotificationCreated
+    attribute :user_id
+    attribute :count
+    attribute :activators
+  end
+          </code></pre>
+        </section>
+        <section>
+          <h1>But how?</h1>
+        </section>
+        <section>
+          <h1 class="storm">Event Storming</h1>
         </section>
         <section>
           <h1 class="fragment es">Event Sourcing<span class="fragment">?</span></h1>
@@ -59,15 +133,6 @@
             <li>then, this happened</li>
             <li>...</li>
           </ol>
-        </section>
-        <section>
-          <pre><code>
-          class Editor::StoryPublished < DomainEvent
-            attribute :story_content
-            attribute :story_id
-            attribute :user_id
-          end
-          </code></pre>
         </section>
         <section>
           <h1>So, what happens?</h1>
@@ -111,47 +176,6 @@
           </code></pre>
         </section>
         <section>
-          <h1>But why?</h1>
-          <p class="fragment">When this will require a new way of thinking 🤯</p>
-        </section>
-        <section>
-          <strong>Behaviour</strong> over structure
-        </section>
-        <section>
-          Design the <strong>simplest</strong> thing that could possibly work
-        </section>
-        <section>
-          <section>
-            <strong class="ddd">Ubiquitous Language</strong>
-          </section>
-          <section>
-            <pre><code>
-  class MembershipActivatedMoreThanOnceNotificationCreated
-    attribute :user_id
-    attribute :count
-    attribute :activators
-  end
-            </code></pre>
-          </section>
-        </section>
-        <section>
-          <section>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </section>
-        </section>
-        <section data-transition="zoom-in slide-out">
-          <span style="font-size:300%">🤯</span>
-        </section>
-        <section data-transition="zoom-in slide-out">
-          <span style="font-size:300%">😌</span>
-        </section>
-        <section>
-          <h1>But how?</h1>
-        </section>
-        <section>
-          <h1 class="storm">Event Storming</h1>
-        </section>
-        <section>
           <div style="display:flex;justify-content:space-evenly;align-items:center;">
             <img class="plain logo" src="graphic/zetland.jpg" />
             <span>❤️</span>
@@ -176,6 +200,26 @@
             <li>Eventual consistency</li>
             <li>Evolving events over time</li>
           </ul>
+        </section>
+        <section data-transition="zoom-in slide-out">
+          <span style="font-size:300%">🤯</span>
+        </section>
+        <section data-transition="zoom-in slide-out">
+          <span style="font-size:300%">😌</span>
+        </section>
+        <section>
+          <p>
+            <strong>Behaviour</strong> over structure
+          </p>
+          <p>
+            Design the <strong>simplest</strong> thing that could possibly work
+          </p>
+          <p>
+            <strong class="ddd">Ubiquitous Language</strong>
+          </p>
+          <p>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+          </p>
         </section>
         <section>
           <h1>Questions 🤗</h1>
