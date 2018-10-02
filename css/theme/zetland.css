@@ -296,3 +296,6 @@ a {
 
 .cqrs {
   color: #f1b613 !important; }
+
+.transparent {
+  opacity: 0; }
