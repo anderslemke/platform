@@ -40,7 +40,7 @@
         <section>
           <img class="plain logo mb-8" src="graphic/zetland.jpg" />
           <h1 class="pb-0 mb-0">Events on Rails</h1>
-          <p class="text-xs pt-0 mt-0">Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain Driven Design</span> and <span class="cqrs">CQRS</span></p>
+          <p class="text-xs pt-0 mt-0">Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain-Driven Design</span> and <span class="cqrs">CQRS</span></p>
           <p class="text-grey text-xs font-thin mt-8">
             by Anders Lemke <br/>
             Platform Architect and Lead Engineer at Zetland
@@ -57,57 +57,50 @@
           <img class="plain" src="graphic/intro.png" />
         </section>
         <section>
-          <h3 class="fragment">Have you ever</h3>
+          <h1>Agenda</h1>
+          <ul>
+            <li>What's the problem?</li>
+            <li>My epiphany</li>
+            <li>Why I still think it's a good idea</li>
+            <li>What is this?</li>
+            <li>How we do it at Zetland</li>
+            <li>What now?</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Have you ever</h3>
           <ul>
             <li class="fragment">felt <strong>discrepancy</strong> in code concepts and business concepts?</li>
             <li class="fragment">built the <strong>database schema</strong> before the user experience?</li>
             <li class="fragment"><strong>overengineered</strong> (what turned out to be) simple concepts?</li>
-            <li class="fragment">deleted data on a production system by accident because of <strong>unforseen side effects</strong>?</li>
+            <li class="fragment">deleted data on a production system by accident because of <strong>unforeseen side effects</strong>?</li>
             <li class="fragment">struggled with performance of <strong>tables that did too much</strong>?</li>
           </ul>
-          <h3 class="fragment pt-4">Yeah, me neither! 😇</h3>
-          <aside data-markdown class="notes">
-            Agenda:
-
-            - Problem
-            - My epiphany
-            - Why I still think it's a good idea
-            - How we do it at Zetland
-            - Challenges
-
-          </aside>
+        </section>
+        <section>
+          <h2>Yeah, me neither! 😇</h2>
+        </section>
+        <section>
+          <h2>🤥</h2>
+        </section>
+        <section>
+          <h2>I've felt the pain! 😳</h2>
         </section>
         <section data-transition="">
-          <p class="fragment text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
+          <p class="text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
           <h1 class="fragment">Events are key</h1>
           <p class="transparent text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
-          <aside data-markdown class="notes">
-            Searched
-
-            Events
-
-            Confuse
-          </aside>
         </section>
         <section data-transition="">
           <p class="transparent text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
           <h1 class="">Events are key</h1>
           <p class="text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
-          <aside data-markdown class="notes">
-            Searched
-
-            Events
-
-            Confuse
-          </aside>
         </section>
         <section data-transition="zoom-in slide-out">
           <h1 style="font-size:300%">🤯</h1>
         </section>
         <section>
           <h1>Why then?</h1>
-        </section>
-        <section>
         </section>
         <section>
           Only design <strong>simple facts</strong>
@@ -136,7 +129,7 @@
           </section>
         </section>
         <section>
-          <strong class="ddd fragment">Ubiquitous Language</strong>
+          <strong class="ddd">Ubiquitous Language</strong>
           <aside data-markdown class="notes">
             Agile
 
@@ -153,13 +146,10 @@
           </code></pre>
         </section>
         <section>
-          <h1>But how?</h1>
+          <h1>What is this?</h1>
         </section>
         <section>
-          <h1 class="storm">Event Storming</h1>
-        </section>
-        <section>
-          <h1 class="fragment es">Event Sourcing<span class="fragment">?</span></h1>
+          <h1 class="es">Event Sourcing</span></h1>
           <p class="fragment">
             The <strong>authoritative source of truth</strong> is an <br /><strong>append-only stream</strong> of <strong>immutable events</strong>
           </p>
@@ -173,17 +163,10 @@
           </ol>
         </section>
         <section>
-          <h1>So, what happens?</h1>
+          <h1 class="cqrs">CQRS</span></h1>
         </section>
         <section>
-          <section>
-            <p>
-              The event is <strong>saved in our <span class="es">event store</span></strong>,<br/> then <strong>broadcasted to every <span class="ddd">bounded context</span></strong>
-            </p>
-          </section>
-          <section>
-            <img src="graphic/overview.svg" class="plain" />
-          </section>
+          <h1 class="ddd">Bounded context</span></h1>
         </section>
         <section>
           <div class="flex items-center content-center justify-center">
@@ -214,6 +197,12 @@
           </code></pre>
         </section>
         <section>
+          <h1>But how?</h1>
+        </section>
+        <section>
+          <h1 class="storm">Event Storming</h1>
+        </section>
+        <section>
           <div style="display:flex;justify-content:space-evenly;align-items:center;">
             <img class="plain logo" src="graphic/zetland.jpg" />
             <span>❤️</span>
@@ -229,6 +218,9 @@
           <img src="graphic/overview.svg" class="plain" />
         </section>
         <section>
+          <h1>What now?</h1>
+        </section>
+        <section>
           <h4>Challenges</h4>
           <ul>
             <li>Added complexity at high level</li>
@@ -239,35 +231,12 @@
             <li>Evolving events over time</li>
           </ul>
         </section>
-        <section data-transition="zoom-in slide-out">
-          <span style="font-size:300%">🤯</span>
-        </section>
-        <section data-transition="zoom-in slide-out">
-          <span style="font-size:300%">😌</span>
-        </section>
-        <section>
-          <p>
-            Only design <strong>simple facts</strong>
-          </p>
-          <p>
-            <strong>Behaviour</strong> over structure
-          </p>
-          <p>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </p>
-          <p>
-            <strong class="ddd">Ubiquitous Language</strong>
-          </p>
-        </section>
-        <section>
-          <h1>Questions 🤗</h1>
-        </section>
         <section>
           <h4>Standing on the shoulders of</h4>
           <ul>
             <li><strong>Eric Evans</strong></li>
             <ul>
-              <li class="ddd">Design Driven Development</li>
+              <li class="ddd">Domain-Driven Development</li>
               <ul>
                 <li class="text-grey">Bounded context</li>
                 <li class="text-grey">Ubiquitous Language</li>
@@ -289,8 +258,36 @@
           <h4>Read</h4>
           <ul>
             <li><a href="https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/">Turning the database inside-out with Apache Samza</a> by <a href="https://www.confluent.io/blog/author/martin-kleppmann/">Martin Klepmann</a> </li>
+            <li>
+              <a href="http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html">Introducing Event Storming</a> by <a href="https://plus.google.com/101355923664295433576">Alberto Brandolini</a>
+            </li>
           </ul>
-
+        </section>
+        <section>
+          <h1>Where to start?</h1>
+          <p>
+            Try out <span class="storm">Event Storming</span>
+          </p>
+          <p>
+            (And please share what you learned on <a href="mailto:anders@zetland.dk">anders@zetland.dk</a>)
+          </p>
+        </section>
+        <section>
+          <p>
+            Only design <strong>simple facts</strong>
+          </p>
+          <p>
+            <strong>Behaviour</strong> over structure
+          </p>
+          <p>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+          </p>
+          <p>
+            <strong class="ddd">Ubiquitous Language</strong>
+          </p>
+        </section>
+        <section>
+          <h1>Questions 🤗</h1>
         </section>
         <section>
           <h1>Thank you 🤗</h1>
