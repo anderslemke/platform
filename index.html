@@ -120,15 +120,13 @@
         <section>
           <div class="flex items-center content-center justify-center">
             <div class="text-left">
-              ✍️ A row for the news room <span class="text-xs ddd opacity-50">(Editor)</span>
+              ✍️ A story is something you edit <span class="ddd">(Editor)</span>
               <br /><br />
-              👩‍💻 A row for members <span class="text-xs ddd opacity-50">(Consume)</span>
+              👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
               <br /><br />
-              📒 A row for internal reporting <span class="text-xs ddd opacity-50">(Internal reporting)</span>
+              📒 A story is something you count <span class="ddd">(Internal reporting)</span>
               <br /><br />
-              🏞 A row for discovery <span class="text-xs ddd opacity-50">(Discover)</span>
-              <br /><br />
-              💥 Invalidate the cache for that story
+              🏞 A story is something you discover <span class="ddd">(Discover)</span>
             </div>
           </div>
         </section>
@@ -144,7 +142,6 @@
           attribute :story_content
           attribute :story_id
           attribute :user_id
-          attribute :published_at
         end
           </code></pre>
         </section>
@@ -212,43 +209,51 @@
           <img src="graphic/overview.png" class="plain" />
         </section>
         <section>
+          <img src="graphic/overview_post.png" class="plain" />
+        </section>
+        <section>
           <img src="graphic/overview_es.png" class="plain" />
         </section>
         <section>
-          <h3>1. Load the events</h3>
+          <img src="graphic/overview_es1.png" class="plain" />
+        </section>
+        <section>
           <pre><code class="ruby">
     # In aggregate_repository.rb
-    aggregate = @aggregate_class.new(aggregate_id)
-    events = store.load_events(
-      @aggregate_class,
-      aggregate_id
-    )
-    aggregate.rebuild(events)
+    def build(aggregate_class, aggregate_id)
+      aggregate = aggregate_class.new(aggregate_id)
+      events = EventStore.load_events(
+        aggregate_class,
+        aggregate_id
+      )
+      aggregate.rebuild(events)
+    end
           </code></pre>
         </section>
         <section>
-          <h3>2. Build the aggregate</h3>
+          <img src="graphic/overview_es2.png" class="plain" />
+        </section>
+        <section>
           <pre><code>
         # In editor/story.rb
         def apply_story_revision_created(event)
           @story_content = event.story_content
-          @saved_at = event.event_published_at
         end
           </code></pre>
         </section>
         <section>
-          <h3>3. Do the thing</h3>
+          <img src="graphic/overview_es3.png" class="plain" />
+        </section>
+        <section>
           <pre><code>
         # In editor/story.rb
         def publish(user_id:)
-          send_to_followers!
-          send_push!
+          return unless reviewed?
 
           apply Editor::StoryPublished.new(
             user_id: user_id,
-            story_id: story_id,
-            story_content: story_content.to_h,
-            published_at: Time.now
+            story_id: @story_id,
+            story_content: @story_content,
           )
         end
           </code></pre>
@@ -258,49 +263,43 @@
           # In editor/story.rb
           def apply_story_published(event)
             @status = :published
-            @published_at = event.published_at
-            @publish_at = nil
           end
           </code></pre>
         </section>
         <section>
-          <h3>4. Save the events</h3>
+          <img src="graphic/overview_es4.png" class="plain" />
+        </section>
+        <section>
           <pre><code class="ruby">
               # In command_handler.rb
 
               EventStore.store_events(
                 aggregate_class,
                 aggregate_id,
-                aggregate.unpublished_events,
-                initial_version,
-                queue
+                aggregate.unpublished_events
               )
           </code></pre>
         </section>
         <section>
-          <h3>5. Publish the events</h3>
-        </section>
-        <section>
-          <img src="graphic/overview_es.png" class="plain" />
+          <img src="graphic/overview_es5.png" class="plain" />
         </section>
         <section>
           <img src="graphic/overview_queue.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_processors.png" class="plain" />
         </section>
         <section>
           <p>
             <span class="ddd">Consume:</span> A row for members 👩‍💻 
           </p>
           <pre><code>
-    when Editor::StoryPublished
-      story = Consume::Story.find_or_create(event.story_id)
-      story.story_content = event.story_content
-      story.published_at ||= event.published_at
-      story.revised_at = event.event_published_at
-      story.save
+          when Editor::StoryPublished
+            Consume::Story.create(
+              story_id: event.story_id,
+              story_content: event.story_content
+            )
           </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_queue.png" class="plain" />
         </section>
         <section>
           <img src="graphic/overview_read.png" class="plain" />
@@ -314,12 +313,11 @@
         <section>
           <h4>Challenges</h4>
           <ul>
-            <li>Added complexity at high level</li>
-            <li>Write some new Rails generators</li>
-            <li>Quite a lot of moving parts</li>
-            <li>Relearn to design software</li>
-            <li>Eventual consistency</li>
-            <li>Evolving events over time</li>
+            <li class="fragment">Added complexity at high level</li>
+            <li class="fragment">Write some new Rails generators</li>
+            <li class="fragment">Relearn to design software</li>
+            <li class="fragment">Eventual consistency</li>
+            <li class="fragment">Evolving events over time</li>
           </ul>
         </section>
         <section>
@@ -327,7 +325,7 @@
           <ul>
             <li><strong>Eric Evans</strong></li>
             <ul>
-              <li class="ddd">Domain-Driven Development</li>
+              <li class="ddd">Domain-Driven Design</li>
               <ul>
                 <li class="text-grey">Bounded context</li>
                 <li class="text-grey">Ubiquitous Language</li>
@@ -395,7 +393,10 @@
             Please reach out
           </p>
           <p>
-            <a href="mailto:anders@zetland.dk">anders@zetland.dk</a>
+            📱 <a href="tel:+4520442127">20 44 21 27</a>
+          </p>
+          <p>
+            💻 <a href="mailto:anders@zetland.dk">anders@zetland.dk</a>
           </p>
         </section>
       </div>
