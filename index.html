@@ -61,9 +61,9 @@
           <ul>
             <li>What's the problem?</li>
             <li>My epiphany</li>
-            <li>Why I still think it's a good idea</li>
             <li>What is this?</li>
-            <li>How we do it at Zetland</li>
+            <li>Why I still think it's a good idea</li>
+            <li>What it looks like</li>
             <li>What now?</li>
           </ul>
         </section>
@@ -96,58 +96,6 @@
           <h1 class="">Events are key</h1>
           <p class="text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
         </section>
-        <section data-transition="zoom-in slide-out">
-          <h1 style="font-size:300%">🤯</h1>
-        </section>
-        <section>
-          <h1>Why then?</h1>
-        </section>
-        <section>
-          Only design <strong>simple facts</strong>
-        </section>
-        <section>
-          <pre><code>
-        class Editor::StoryPublished < DomainEvent
-          attribute :story_content
-          attribute :story_id
-          attribute :user_id
-        end
-          </code></pre>
-        </section>
-        <section>
-          <strong>Behaviour</strong> over structure
-          <aside data-markdown class="notes">
-            Example with warehouse
-          </aside>
-        </section>
-        <section>
-          <section>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-            <aside data-markdown class="notes">
-              Internal reporting that was wrong in counting reactivations
-            </aside>
-          </section>
-        </section>
-        <section>
-          <strong class="ddd">Ubiquitous Language</strong>
-          <aside data-markdown class="notes">
-            Agile
-
-            Example that requires a bit domain knowledge
-          </aside>
-        </section>
-        <section>
-          <pre><code>
-  class MembershipActivatedMoreThanOnceNotificationCreated
-    attribute :user_id
-    attribute :count
-    attribute :activators
-  end
-          </code></pre>
-        </section>
-        <section>
-          <h1>What is this?</h1>
-        </section>
         <section>
           <h1 class="es">Event Sourcing</span></h1>
           <p class="fragment">
@@ -174,7 +122,7 @@
             <div class="text-left">
               ✍️ A row for the news room <span class="text-xs ddd opacity-50">(Editor)</span>
               <br /><br />
-              👩‍💻 A row for readers <span class="text-xs ddd opacity-50">(Consume)</span>
+              👩‍💻 A row for members <span class="text-xs ddd opacity-50">(Consume)</span>
               <br /><br />
               📒 A row for internal reporting <span class="text-xs ddd opacity-50">(Internal reporting)</span>
               <br /><br />
@@ -185,8 +133,162 @@
           </div>
         </section>
         <section>
+          <h1>OK, Why? 🤯</h1>
+        </section>
+        <section>
+          Only design <strong>simple facts</strong>
+        </section>
+        <section>
+          <pre><code>
+        class Editor::StoryPublished < DomainEvent
+          attribute :story_content
+          attribute :story_id
+          attribute :user_id
+          attribute :published_at
+        end
+          </code></pre>
+        </section>
+        <section>
+          <strong>Behaviour</strong> over structure
+          <aside data-markdown class="notes">
+            Example with warehouse
+          </aside>
+        </section>
+        <section>
+          <img src="graphic/warehouse.jpg" class="plain" />
+        </section>
+        <section>
+          <pre><code>
+        class Identity::NameChanged < DomainEvent
+          attribute :new_name
+          attribute :user_id
+        end
+          </code></pre>
+        </section>
+        <section>
+          <img src="graphic/wedding.jpg" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/divorce.jpg" class="plain" />
+        </section>
+        <section>
+          <section>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+            <aside data-markdown class="notes">
+              Internal reporting that was wrong in counting reactivations
+            </aside>
+          </section>
+        </section>
+        <section>
+          <img src="graphic/winback.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/flatline.gif" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/ekg.png" class="plain" />
+        </section>
+        <section>
+          <strong class="ddd">Ubiquitous Language</strong>
+          <aside data-markdown class="notes">
+            Agile
+
+            Example that requires a bit domain knowledge
+          </aside>
+        </section>
+        <section>
+          <pre><code>
+  class MembershipActivatedMoreThanOnceNotificationCreated
+    attribute :user_id
+    attribute :count
+    attribute :activators
+  end
+          </code></pre>
+        </section>
+        <section>
+          <h1>But how does it look?</h1>
+        </section>
+        <section>
+          <img src="graphic/overview.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_es.png" class="plain" />
+        </section>
+        <section>
+          <h3>1. Load the events</h3>
+          <pre><code class="ruby">
+    # In aggregate_repository.rb
+    aggregate = @aggregate_class.new(aggregate_id)
+    events = store.load_events(
+      @aggregate_class,
+      aggregate_id
+    )
+    aggregate.rebuild(events)
+          </code></pre>
+        </section>
+        <section>
+          <h3>2. Build the aggregate</h3>
+          <pre><code>
+        # In editor/story.rb
+        def apply_story_revision_created(event)
+          @story_content = event.story_content
+          @saved_at = event.event_published_at
+        end
+          </code></pre>
+        </section>
+        <section>
+          <h3>3. Do the thing</h3>
+          <pre><code>
+        # In editor/story.rb
+        def publish(user_id:)
+          send_to_followers!
+          send_push!
+
+          apply Editor::StoryPublished.new(
+            user_id: user_id,
+            story_id: story_id,
+            story_content: story_content.to_h,
+            published_at: Time.now
+          )
+        end
+          </code></pre>
+        </section>
+        <section>
+          <pre><code class="ruby">
+          # In editor/story.rb
+          def apply_story_published(event)
+            @status = :published
+            @published_at = event.published_at
+            @publish_at = nil
+          end
+          </code></pre>
+        </section>
+        <section>
+          <h3>4. Save the events</h3>
+          <pre><code class="ruby">
+              # In command_handler.rb
+
+              EventStore.store_events(
+                aggregate_class,
+                aggregate_id,
+                aggregate.unpublished_events,
+                initial_version,
+                queue
+              )
+          </code></pre>
+        </section>
+        <section>
+          <h3>5. Publish the events</h3>
+        </section>
+        <section>
+          <img src="graphic/overview_es.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_queue.png" class="plain" />
+        </section>
+        <section>
           <p>
-            Example: A row for readers 👩‍💻 
+            <span class="ddd">Consume:</span> A row for members 👩‍💻 
           </p>
           <pre><code>
     when Editor::StoryPublished
@@ -198,25 +300,13 @@
           </code></pre>
         </section>
         <section>
-          <h1>But how?</h1>
+          <img src="graphic/overview_queue.png" class="plain" />
         </section>
         <section>
-          <h1 class="storm">Event Storming</h1>
+          <img src="graphic/overview_read.png" class="plain" />
         </section>
         <section>
-          <div style="display:flex;justify-content:space-evenly;align-items:center;">
-            <img class="plain logo" src="graphic/zetland.jpg" />
-            <span>❤️</span>
-            <div style="display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;">
-              <img class="plain third-party-logo" src="graphic/elephant.png" />
-              <img class="plain third-party-logo" src="graphic/RabbitMQ-logo.svg" />
-              <img class="plain third-party-logo" src="graphic/ruby.png" />
-              <img class="plain third-party-logo" src="graphic/rails-logo.svg" />
-            </div>
-          </div>
-        </section>
-        <section>
-          <img src="graphic/overview.svg" class="plain" />
+          <img src="graphic/overview.png" class="plain" />
         </section>
         <section>
           <h1>What now?</h1>
@@ -262,16 +352,27 @@
             <li>
               <a href="http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html">Introducing Event Storming</a> by <a href="https://plus.google.com/101355923664295433576">Alberto Brandolini</a>
             </li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=OSARwCnSRCI">
+                Vaughn Vernon - Rethinking Legacy and Monolithic Systems
+              </a>
+
+            </li>
           </ul>
         </section>
         <section>
           <h1>Where to start?</h1>
-          <p>
-            Try out <span class="storm">Event Storming</span>
-          </p>
-          <p>
-            (And please share what you learned on <a href="mailto:anders@zetland.dk">anders@zetland.dk</a>)
-          </p>
+        </section>
+        <section>
+          <h1 class="storm">
+            Event Storming
+          </h1>
+        </section>
+        <section>
+          <img src="graphic/es_start.jpg" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/es_done.jpg" class="plain" />
         </section>
         <section>
           <p>

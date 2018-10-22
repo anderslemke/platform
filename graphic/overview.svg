@@ -243,11 +243,11 @@
                 <text id="Event-processor" fill="#000000" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal">
                     <tspan x="29" y="69">Event processor</tspan>
                 </text>
-                <g id="Group-2" transform="translate(39.000000, 0.000000)">
-                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(34.000000, 12.000000) rotate(90.000000) translate(-34.000000, -12.000000) " x="22" y="-22" width="24" height="68"></rect>
-                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(178.000000, 12.000000) rotate(90.000000) translate(-178.000000, -12.000000) " x="166" y="-31" width="24" height="86"></rect>
-                    <text id="Editor" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal" fill="#12884A">
-                        <tspan x="17" y="17">Editor</tspan>
+                <g id="Group-2" transform="translate(42.000000, 0.000000)">
+                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(41.000000, 15.000000) rotate(90.000000) translate(-41.000000, -15.000000) " x="29" y="-26" width="24" height="82"></rect>
+                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(175.000000, 12.000000) rotate(90.000000) translate(-175.000000, -12.000000) " x="163" y="-31" width="24" height="86"></rect>
+                    <text id="Consume" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal" fill="#12884A">
+                        <tspan x="14" y="17">Consume</tspan>
                     </text>
                 </g>
                 <g id="Group-2" filter="url(#filter-17)" transform="translate(205.000000, 26.000000)">
@@ -299,28 +299,28 @@
                     <polygon id="Triangle" points="41.2144326 0.441942601 43.5208681 2.14523444 41.2144326 3.84852628"></polygon>
                 </g>
             </g>
-            <g id="Editor" transform="translate(0.000000, 124.000000)">
-                <g id="Group-3" transform="translate(0.000000, 13.000000)">
+            <g id="Editor" transform="translate(0.000000, 123.000000)">
+                <g id="Group-3" transform="translate(0.000000, 14.000000)">
                     <rect id="Rectangle-2" stroke="#12884A" stroke-width="4" opacity="0.51392663" x="13.346049" y="2" width="331.653951" height="104"></rect>
                     <rect id="Rectangle-2" stroke="#12884A" stroke-width="4" opacity="0.51" x="13.346049" y="165" width="331.653951" height="104"></rect>
                     <rect id="Rectangle-4" fill="#FFFFFF" x="0" y="21" width="22.6920981" height="46"></rect>
                 </g>
                 <text id="Event-processor" fill="#000000" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal">
-                    <tspan x="29" y="70">Event processor</tspan>
+                    <tspan x="29" y="71">Event processor</tspan>
                 </text>
-                <g id="Group-2" transform="translate(39.000000, 0.000000)">
-                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(43.000000, 12.500000) rotate(90.000000) translate(-43.000000, -12.500000) " x="31" y="-30" width="24" height="85"></rect>
-                    <text id="Consume" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal" fill="#12884A">
-                        <tspan x="17" y="18">Consume</tspan>
+                <g id="Group-2" transform="translate(41.000000, 0.000000)">
+                    <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(32.000000, 12.000000) rotate(90.000000) translate(-32.000000, -12.000000) " x="20" y="-20" width="24" height="64"></rect>
+                    <text id="Editor" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal" fill="#12884A">
+                        <tspan x="15" y="19">Editor</tspan>
                     </text>
                 </g>
-                <g id="Group-2" transform="translate(39.000000, 165.000000)">
+                <g id="Group-2" transform="translate(39.000000, 166.000000)">
                     <rect id="Rectangle-4" fill="#FFFFFF" transform="translate(62.000000, 12.000000) rotate(90.000000) translate(-62.000000, -12.000000) " x="50" y="-50" width="24" height="124"></rect>
                     <text id="Internal-reporting" font-family="HelveticaNeue, Helvetica Neue" font-size="12" font-weight="normal" fill="#12884A">
                         <tspan x="17" y="17">Internal reporting</tspan>
                     </text>
                 </g>
-                <g id="Group-2" filter="url(#filter-18)" transform="translate(205.000000, 27.000000)">
+                <g id="Group-2" filter="url(#filter-18)" transform="translate(205.000000, 28.000000)">
                     <g id="Read-model" transform="translate(12.000000, 0.000000)">
                         <g id="Rectangle-2" transform="translate(0.000000, 7.000000)">
                             <g id="path-14-link" fill="#D8D8D8">
@@ -364,7 +364,7 @@
                         </g>
                     </g>
                 </g>
-                <g id="Group-2" filter="url(#filter-19)" transform="translate(205.000000, 187.000000)">
+                <g id="Group-2" filter="url(#filter-19)" transform="translate(205.000000, 188.000000)">
                     <g id="Read-model" transform="translate(12.000000, 0.000000)">
                         <g id="Rectangle-2" transform="translate(0.000000, 7.000000)">
                             <g id="path-14-link" fill="#D8D8D8">
@@ -403,7 +403,7 @@
                         <ellipse id="Oval" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="51" cy="8.05696203" rx="51" ry="8.05696203"></ellipse>
                     </g>
                 </g>
-                <g id="Line-+-Triangle" transform="translate(134.000000, 65.000000)" stroke="#A9A9A9" stroke-width="2">
+                <g id="Line-+-Triangle" transform="translate(134.000000, 66.000000)" stroke="#A9A9A9" stroke-width="2">
                     <path d="M-5.68434189e-14,2.14523444 L41.3126602,2.14523444" id="Line"></path>
                     <polygon id="Triangle" points="41.2144326 0.441942601 43.5208681 2.14523444 41.2144326 3.84852628"></polygon>
                 </g>
