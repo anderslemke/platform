@@ -55,32 +55,41 @@
         </section>
         <section>
           <h1>
-            👩🏽‍💻
+            💁🏼‍♀️
+          </h1>
+          <h1 class="flex justify-around">
+            <span>
+              👨🏽‍💻
+            </span>
+            <span>
+              🏢
+            </span>
           </h1>
         </section>
         <section>
           <h1>
-            🏢
+            🙅🏼‍♀️
+          </h1>
+          <h1 class="flex justify-around">
+            <span>
+              🤦🏽‍♂️
+            </span>
+            <span>
+              🔒
+            </span>
           </h1>
         </section>
         <section>
           <h1>
-            🤬
+            👩🏼‍💻
           </h1>
-        </section>
-        <section>
-          <h1>
-            🔒
-          </h1>
-        </section>
-        <section>
-          <h1>
-            🤗
-          </h1>
-        </section>
-        <section>
-          <h1>
-            🚀
+          <h1 class="flex justify-around">
+            <span>
+              🙇🏽‍♂️
+            </span>
+            <span>
+              🚀
+            </span>
           </h1>
         </section>
         <section>
@@ -92,36 +101,12 @@
         <section>
           <h1 class="flex justify-around">
             <span>
-              👨🏽‍💻
-            </span>
-            <span>
-              🏢
+              🚀
             </span>
           </h1>
         </section>
-
         <section>
           <img class="plain" src="graphic/intro.png" />
-        </section>
-        <section>
-          <h1>Agenda</h1>
-          <ul style="list-style: none;">
-            <li class="fragment">🤔 How I got here?</li>
-            <li class="fragment">🤷‍♂️ What is this event thing?</li>
-            <li class="fragment">💡 Why I still think it's a good idea</li>
-            <li class="fragment">👀 What it looks like</li>
-            <li class="fragment">🚀 What now?</li>
-          </ul>
-        </section>
-        <section data-transition="">
-          <p class="text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
-          <h1 class="fragment">Events are key</h1>
-          <p class="transparent text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
-        </section>
-        <section data-transition="">
-          <p class="transparent text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
-          <h1 class="">Events are key</h1>
-          <p class="text-grey"><span class="es">Event Sourcing</span> // <span class="cqrs">CQRS</span> // <span class="ddd">Bounded Context</span></p>
         </section>
         <section>
           <h1 class="es">Domain Event</span></h1>
@@ -139,6 +124,15 @@
           </code></pre>
           <aside data-markdown class="notes">
           </aside>
+        </section>
+        <section>
+          <img src="graphic/overview.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_post.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_es.png" class="plain" />
         </section>
         <section>
           <h1 class="es">Event Sourcing</span></h1>
@@ -163,134 +157,6 @@
           <div class="flex justify-center items-center">
             <img class="plain" src="graphic/stack.png" />
           </div>
-        </section>
-        <section>
-          <h1 class="cqrs">CQRS</span></h1>
-          <p>(Command Query Responsibility Segregation)</p>
-        </section>
-        <section>
-          <img class="plain" src="graphic/cqrs.png" />
-        </section>
-        <section>
-          <h1 class="ddd">Bounded context</span></h1>
-        </section>
-        <section>
-          <ul style="list-style: none;">
-            <li class="mb-3">
-              ✍️ A story is something you edit <span class="ddd">(Editor)</span>
-            </li>
-            <li class="fragment mb-3">
-              👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
-            </li>
-            <li class="fragment mb-3">
-              📒 A story is something you count <span class="ddd">(Internal reporting)</span>
-            </li>
-            <li class="fragment mb-3">
-              🏞 A story is something you discover <span class="ddd">(Discover)</span>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h1>OK, Why?</h1>
-        </section>
-        <section>
-          <strong>Behaviour</strong> over structure
-          <aside data-markdown class="notes">
-            Example with warehouse
-          </aside>
-        </section>
-        <section>
-          <img src="graphic/warehouse2.jpg" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/scanner2.jpg" class="plain" />
-        </section>
-        <section>
-          <h1>💥</h1>
-        </section>
-        <section>
-          <img src="graphic/profile.png" class="plain" />
-        </section>
-        <section>
-          <div class="flex justify-center items-center">
-            <span class="text-4xl">👉</span><img class="plain pb-10" src="graphic/table.png" />
-          </div>
-        </section>
-        <section>
-          <pre><code>
-        class Identity::NameChanged < DomainEvent
-          attribute :new_name
-          attribute :user_id
-        end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/wedding.jpg" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/divorce.jpg" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/broadcast.png" class="plain" />
-        </section>
-        <section>
-          <section>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-            <aside data-markdown class="notes">
-              Internal reporting that was wrong in counting reactivations
-            </aside>
-          </section>
-        </section>
-        <section>
-          <img src="graphic/winback.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/flatline.gif" class="plain" />
-        </section>
-        <section>
-          <h1>📈</h1>
-        </section>
-        <section>
-          <img src="graphic/misunderstand.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/same.png" class="plain" />
-        </section>
-        <section>
-          <h1 class="ddd">Ubiquitous Language</h1>
-        </section>
-        <section>
-          <pre><code>
-        class Editor::StoryPublished < DomainEvent
-          attribute :story_content
-          attribute :story_id
-          attribute :user_id
-        end
-          </code></pre>
-          <aside data-markdown class="notes">
-          </aside>
-        </section>
-        <section>
-          <pre><code>
-              story_revision_created.rb
-              story_approved_for_publishing.rb
-              story_published.rb
-              story_scheduled_for_publishing.rb
-              story_scheduling_cancelled.rb
-              story_sent_to_followers.rb
-              story_sent_via_push.rb
-              story_deleted.rb
-              story_unpublished.rb
-          </code></pre>
-        </section>
-        <section>
-          <h1>But how does it look?</h1>
-        </section>
-        <section>
-          <img src="graphic/overview.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_post.png" class="plain" />
         </section>
         <section>
           <img src="graphic/overview_es.png" class="plain" />
@@ -368,6 +234,38 @@
           <img src="graphic/overview_queue.png" class="plain" />
         </section>
         <section>
+          <img class="plain" src="graphic/cqrs.png" />
+        </section>
+        <section>
+          <h1 class="cqrs">CQRS</span></h1>
+          <p>(Command Query Responsibility Segregation)</p>
+        </section>
+        <section>
+          <img src="graphic/overview_queue.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/overview_processors.png" class="plain" />
+        </section>
+        <section>
+          <h1 class="ddd">Bounded context</span></h1>
+        </section>
+        <section>
+          <ul style="list-style: none;">
+            <li class="mb-3">
+              ✍️ A story is something you edit <span class="ddd">(Editor)</span>
+            </li>
+            <li class="fragment mb-3">
+              👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
+            </li>
+            <li class="fragment mb-3">
+              📒 A story is something you count <span class="ddd">(Internal reporting)</span>
+            </li>
+            <li class="fragment mb-3">
+              🏞 A story is something you discover <span class="ddd">(Discover)</span>
+            </li>
+          </ul>
+        </section>
+        <section>
           <img src="graphic/overview_processors.png" class="plain" />
         </section>
         <section>
@@ -387,6 +285,112 @@
         </section>
         <section>
           <img src="graphic/overview.png" class="plain" />
+        </section>
+        <section>
+          <h1>OK, Why?</h1>
+        </section>
+        <section>
+          Only design <strong>simple facts</strong>
+        </section>
+        <section>
+          <img src="graphic/mainframe_uml.png" class="plain" />
+        </section>
+        <section>
+          <pre><code>
+        class Editor::StoryPublished < DomainEvent
+          attribute :story_content
+          attribute :story_id
+          attribute :user_id
+        end
+          </code></pre>
+          <aside data-markdown class="notes">
+          </aside>
+        </section>
+        <section>
+          <strong>Behaviour</strong> over structure
+          <aside data-markdown class="notes">
+            Example with warehouse
+          </aside>
+        </section>
+        <section>
+          <img src="graphic/warehouse2.jpg" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/scanner2.jpg" class="plain" />
+        </section>
+        <section>
+          <h1>💥</h1>
+        </section>
+        <section>
+          <h1 class="flex justify-around">
+            <span>
+              🚀
+            </span>
+          </h1>
+        </section>
+        <section>
+          <img src="graphic/profile.png" class="plain" />
+        </section>
+        <section>
+          <div class="flex justify-center items-center">
+            <span class="text-4xl">👉</span><img class="plain pb-10" src="graphic/table.png" />
+          </div>
+        </section>
+        <section>
+          <pre><code>
+        class Identity::NameChanged < DomainEvent
+          attribute :new_name
+          attribute :user_id
+        end
+          </code></pre>
+        </section>
+        <section>
+          <img src="graphic/wedding.jpg" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/divorce.jpg" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/broadcast.png" class="plain" />
+        </section>
+        <section>
+          <section>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+            <aside data-markdown class="notes">
+              Internal reporting that was wrong in counting reactivations
+            </aside>
+          </section>
+        </section>
+        <section>
+          <img src="graphic/winback.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/flatline.gif" class="plain" />
+        </section>
+        <section>
+          <h1>📈</h1>
+        </section>
+        <section>
+          <h1 class="ddd">Ubiquitous Language</h1>
+        </section>
+        <section>
+          <img src="graphic/misunderstand.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/same.png" class="plain" />
+        </section>
+        <section>
+          <pre><code>
+              story_revision_created.rb
+              story_approved_for_publishing.rb
+              story_published.rb
+              story_scheduled_for_publishing.rb
+              story_scheduling_cancelled.rb
+              story_sent_to_followers.rb
+              story_sent_via_push.rb
+              story_deleted.rb
+              story_unpublished.rb
+          </code></pre>
         </section>
         <section>
           <h1>What now?</h1>
@@ -454,6 +458,12 @@
           <img src="graphic/es_done.jpg" class="plain" />
         </section>
         <section>
+          <p>
+            Only design <strong>simple facts</strong>
+          </p>
+          <p>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+          </p>
           <p>
             <strong>Behaviour</strong> over structure
           </p>
