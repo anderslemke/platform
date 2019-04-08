@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Copenhagen Ruby Brigade - November 2018</title>
+    <title>Copenhagen Ruby Brigade - April 2019</title>
 
     <link rel="stylesheet" href="lib/css/tailwind.min.css">
 
@@ -38,429 +38,343 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          <img class="plain logo mb-8" src="graphic/zetland.jpg" />
-          <h1 class="pb-0 mb-0">Events on Rails</h1>
-          <p class="text-xs pt-0 mt-0">Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain-Driven Design</span> and <span class="cqrs">CQRS</span></p>
+          <h1 class="pb-0 mb-0">How context matters</h1>
+          <p class="text-xs pt-0 mt-0">With neuroscience and linguistics</p>
           <p class="text-grey text-xs font-thin mt-8">
-            by Anders Lemke <br/>
+            I'm Anders Lemke<br/>
             Platform Architect and Lead Engineer at Zetland
           </p>
         </section>
         <section>
-          <h1>
-            💁🏼‍♀️
-          </h1>
-          <h1 class="flex justify-around">
-            <span>
-              👨🏽‍💻
-            </span>
-            <span>
-              🏢
-            </span>
-          </h1>
+          <img class="plain" src="graphic/frustrated.jpg" />
         </section>
         <section>
-          <h1>
-            🙅🏼‍♀️
-          </h1>
-          <h1 class="flex justify-around">
-            <span>
-              🤦🏽‍♂️
-            </span>
-            <span>
-              🔒
-            </span>
-          </h1>
+          <img class="plain" src="graphic/keep.jpg" />
         </section>
         <section>
-          <h1>
-            🙋🏼‍♀️
-          </h1>
-          <h1 class="flex justify-around">
-            <span>
-              👨🏽‍💻
-            </span>
-            <span>
-              🚀
-            </span>
-          </h1>
-        </section>
-        <section>
-          <img class="plain" src="graphic/allofus.png" />
-        </section>
-        <section>
-          <img class="plain" src="graphic/uml2.png" />
-        </section>
-        <section>
-          <h1 class="flex justify-around">
-            <span>
-              🚀
-            </span>
-          </h1>
-        </section>
-        <section>
-          <img class="plain" src="graphic/intro.png" />
-        </section>
-        <section>
-          <h1 class="es">Domain Event</span></h1>
-          <p class="fragment">
-            Something <strong>happened</strong>, that somebody <strong>cares about</strong>
-          </p>
-        </section>
-        <section>
-          <pre><code>
-        class Editor::StoryPublished < DomainEvent
-          attribute :story_content
-          attribute :story_id
-          attribute :user_id
-        end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_post.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_es.png" class="plain" />
-        </section>
-        <section>
-          <h1 class="es">Event Sourcing</span></h1>
-          <p class="fragment">
-            The <strong>authoritative source of truth</strong> is an <br /><strong>append-only stream</strong> of <strong>immutable events</strong>
-          </p>
-        </section>
-        <section>
-          <ol>
-            <li>This happened</li>
-            <li>then, this happened</li>
-            <li>then, this happened</li>
-            <li>...</li>
-          </ol>
-        </section>
-        <section>
-          <div class="flex justify-center items-center">
-            <span class="text-4xl">👉</span><img class="plain pb-10" src="graphic/table.png" />
-          </div>
-        </section>
-        <section>
-          <div class="flex justify-center items-center">
-            <img class="plain" src="graphic/stack.png" />
-          </div>
-        </section>
-        <section>
-          <img src="graphic/overview_es.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_es1.png" class="plain" />
-        </section>
-        <section>
-          <pre><code class="ruby">
-    # In aggregate_repository.rb
-    def build(aggregate_class, aggregate_id)
-      aggregate = aggregate_class.new(aggregate_id)
-      events = EventStore.load_events(
-        aggregate_class,
-        aggregate_id
-      )
-      aggregate.rebuild(events)
-    end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es2.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-        # In editor/story.rb
-        def apply_story_revision_created(event)
-          @story_content = event.story_content
-        end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es3.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-        # In editor/story.rb
-        def publish(user_id:)
-          return unless reviewed?
 
-          apply Editor::StoryPublished.new(
-            user_id: user_id,
-            story_id: @story_id,
-            story_content: @story_content,
-          )
-        end
-          </code></pre>
         </section>
         <section>
-          <pre><code class="ruby">
-          # In editor/story.rb
-          def apply_story_published(event)
-            @status = :published
-          end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es4.png" class="plain" />
-        </section>
-        <section>
-          <pre><code class="ruby">
-              # In command_handler.rb
-
-              EventStore.store_events(
-                aggregate_class,
-                aggregate_id,
-                aggregate.unpublished_events
-              )
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es5.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_queue.png" class="plain" />
-        </section>
-        <section>
-          <img class="plain" src="graphic/cqrs.png" />
-        </section>
-        <section>
-          <h1 class="cqrs">CQRS</span></h1>
-          <p>(Command Query Responsibility Segregation)</p>
-        </section>
-        <section>
-          <img src="graphic/overview_queue.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_processors.png" class="plain" />
-        </section>
-        <section>
-          <h1 class="ddd">Bounded context</span></h1>
-        </section>
-        <section>
-          <ul style="list-style: none;">
-            <li class="mb-3">
-              ✍️ A story is something you edit <span class="ddd">(Editor)</span>
-            </li>
-            <li class="fragment mb-3">
-              👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
-            </li>
-            <li class="fragment mb-3">
-              📒 A story is something you count <span class="ddd">(Internal reporting)</span>
-            </li>
-            <li class="fragment mb-3">
-              🏞 A story is something you discover <span class="ddd">(Discover)</span>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <img src="graphic/overview_processors.png" class="plain" />
+          <img class="plain" src="graphic/wtfm.jpg" />
         </section>
         <section>
           <p>
-            <span class="ddd">Consume:</span> A row for members 👩‍💻 
+            Fear, anger, anxeity and aggression is common reactions to
           </p>
-          <pre><code>
-          when Editor::StoryPublished
-            Consume::Story.create(
-              story_id: event.story_id,
-              story_content: event.story_content
-            )
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_read.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview.png" class="plain" />
-        </section>
-        <section>
-          <h1>OK, Why?</h1>
-        </section>
-        <section>
-          Only design <strong>simple facts</strong>
-        </section>
-        <section>
-          <section>
-            <img src="graphic/mainframe_uml.png" class="plain" />
-          </section>
-          <section>
-            <img src="graphic/fullerd.png" class="plain" />
-          </section>
-        </section>
-        <section>
-          <pre><code>
-        class Editor::StoryPublished < DomainEvent
-          attribute :story_content
-          attribute :story_id
-          attribute :user_id
-        end
-          </code></pre>
-        </section>
-        <section>
-          <strong>Behaviour</strong> over structure
-        </section>
-        <section>
-          <img src="graphic/warehouse2.jpg" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/scanner2.jpg" class="plain" />
-        </section>
-        <section>
-          <h1>💥</h1>
-        </section>
-        <section>
-          <h1 class="flex justify-around">
-            <span>
-              🚀
-            </span>
+          <h1 class="fragment">
+            AMBIGUITY
           </h1>
         </section>
         <section>
-          <img src="graphic/profile.png" class="plain" />
+          <h1>
+            Antonio Damasio
+          </h1>
         </section>
         <section>
-          <div class="flex justify-center items-center">
-            <span class="text-4xl">👉</span><img class="plain pb-10" src="graphic/table.png" />
-          </div>
+          <h2>
+            Somatic marker hypothesis
+          </h2>
         </section>
         <section>
-          <pre><code>
-        class Identity::NameChanged < DomainEvent
-          attribute :new_name
-          attribute :user_id
-        end
-          </code></pre>
+          <h1>
+            Iowa Gambling Task
+          </h1>
+          <img class="plain" src="graphic/IowaGamblingTask.gif" />
         </section>
         <section>
-          <img src="graphic/wedding.jpg" class="plain" />
+          <h1>
+            Amygdala
+          </h1>
         </section>
         <section>
-          <img src="graphic/divorce.jpg" class="plain" />
+          <img class="plain" src="graphic/amygdala.jpg" />
         </section>
         <section>
-          <img src="graphic/broadcast.png" class="plain" />
+          <h2>
+            Fear, anxeity, anger and aggression
+          </h2>
+          <h2 class="fragment">
+            is expectable reactions to <strong>ambiguity</strong>
+          </h2>
         </section>
         <section>
-          <section>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </section>
+          <h3>
+            What can we do?
+          </h3>
         </section>
         <section>
-          <img src="graphic/winback.png" class="plain" />
+          <h1>
+            Context
+          </h1>
         </section>
         <section>
-          <img src="graphic/flatline.gif" class="plain" />
-        </section>
-        <section>
-          <h1>📈</h1>
-        </section>
-        <section>
-          <h1 class="ddd">Ubiquitous Language</h1>
-        </section>
-        <section>
-          <img src="graphic/misunderstand.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/same.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-              story_revision_created.rb
-              story_approved_for_publishing.rb
-              story_published.rb
-              story_scheduled_for_publishing.rb
-              story_scheduling_cancelled.rb
-              story_sent_to_followers.rb
-              story_sent_via_push.rb
-              story_deleted.rb
-              story_unpublished.rb
-          </code></pre>
-        </section>
-        <section>
-          <h1>What now?</h1>
-        </section>
-        <section>
-          <h4>Challenges</h4>
-          <ul>
-            <li class="fragment">Added complexity at high level</li>
-            <li class="fragment">Write some new Rails generators</li>
-            <li class="fragment">Relearn to design software</li>
-            <li class="fragment">Eventual consistency</li>
-            <li class="fragment">Evolving events over time</li>
-          </ul>
-        </section>
-        <section>
-          <h4>Standing on the shoulders of</h4>
-          <ul>
-            <li><strong>Eric Evans</strong></li>
-            <ul>
-              <li class="ddd">Domain-Driven Design</li>
-              <ul>
-                <li class="text-grey">Bounded context</li>
-                <li class="text-grey">Ubiquitous Language</li>
-              </ul>
-            </ul>
-            <li><strong>Greg Young</strong></li>
-            <ul>
-              <li class="es">Event Sourcing</li>
-              <li class="cqrs">CQRS</li>
-            </ul>
-            <li><strong>Alberto Brandolini</strong></li>
-            <ul>
-              <li class="storm">Event Storming</li>
-            </ul>
-
-          </ul>
-        </section>
-        <section>
-          <h4>Read</h4>
-          <ul>
-            <li><a href="https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/">Turning the database inside-out with Apache Samza</a> by <a href="https://www.confluent.io/blog/author/martin-kleppmann/">Martin Klepmann</a> </li>
+          <ul class="w-full">
             <li>
-              <a href="http://ziobrando.blogspot.com/2013/11/introducing-event-storming.html">Introducing Event Storming</a> by <a href="https://plus.google.com/101355923664295433576">Alberto Brandolini</a>
+              <strong>Phonetics</strong>
             </li>
             <li>
-              <a href="https://www.youtube.com/watch?v=OSARwCnSRCI">
-                Vaughn Vernon - Rethinking Legacy and Monolithic Systems
-              </a>
-
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+            <li class="opacity-0">
+              <strong>Pragmatics</strong>
             </li>
           </ul>
         </section>
         <section>
-          <h1>Where to start?</h1>
+          <ul>
+            <li>
+              <strong>Phonetics</strong>, the study of the physical properties of speech sound production and perception
+            </li>
+            <li>
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+          </ul>
         </section>
         <section>
-          <h1 class="storm">
-            Event Storming
+          <ul>
+            <li>
+              <strong>Phonetics</strong>
+            </li>
+            <li>
+              <strong>Phonology</strong>, the study of sounds as abstract elements in the speaker's mind that distinguish meaning (phonemes)
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li>
+              <strong>Phonetics</strong>
+            </li>
+            <li>
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>, the study of morphemes, or the internal structures of words and how they can be modified
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li>
+              <strong>Phonetics</strong>
+            </li>
+            <li>
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>, the study of how words combine to form grammatical phrases and sentences
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li>
+              <strong>Phonetics</strong>
+            </li>
+            <li>
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>, the study of the meaning of words (lexical semantics) and fixed word combinations (phraseology), and how these combine to form the meanings of sentences
+            </li>
+            <li>
+              <strong>Pragmatics</strong>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li>
+              <strong>Phonetics</strong>
+            </li>
+            <li>
+              <strong>Phonology</strong>
+            </li>
+            <li>
+              <strong>Morphology</strong>
+            </li>
+            <li>
+              <strong>Syntax</strong>
+            </li>
+            <li>
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>, the study of how utterances are used in communicative acts, and the role played by context and non-linguistic knowledge in the transmission of meaning
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li class="opacity-0">
+              <strong>Phonetics</strong>
+            </li>
+            <li class="opacity-0">
+              <strong>Phonology</strong>
+            </li>
+            <li class="opacity-0">
+              <strong>Morphology</strong>
+            </li>
+            <li class="opacity-0">
+              <strong>Syntax</strong>
+            </li>
+            <li class="opacity-0">
+              <strong>Semantics</strong>
+            </li>
+            <li>
+              <strong>Pragmatics</strong>, the study of how utterances are used in communicative acts, and the role played by context and non-linguistic knowledge in the transmission of meaning
+            </li>
+          </ul>
+        </section>
+        <section>
+          <q>[...] while there are numerous attempts at explaining single aspects of the notion of context, these attempts are rather diverse and do not easily converge to a unified theory of context.</q>
+          <p class="text-sm text-grey">
+            - Rita Finkbeiner, Jörg Meibauer and Petra B. Schumacher from Johannes Gutenberg University, Mainz
+          </p>
+        </section>
+        <section>
+          <img class="plain" src="graphic/n400.png" />
+        </section>
+        <section>
+          <ul>
+            <li class="mb-10">
+              A sparrow is a building
+            </li>
+            <li>
+              A sparrow is a bird
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li class="mb-10">
+              <strong>
+                A sparrow is a building
+              </strong>
+            </li>
+            <li>
+              A sparrow is a bird
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li class="mb-10">
+                A sparrow is not a building
+            </li>
+            <li>
+              A sparrow is not a bird
+            </li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li class="mb-10">
+              <strong>
+                A sparrow is not a building
+              </strong>
+            </li>
+            <li>
+              A sparrow is not a bird
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>
+            Top 5 ways to nail your contexts!
+          </h2>
+          <p class="fragment">
+            #3 will blow your mind
+          </p>
+        </section>
+        <section>
+        </section>
+        <section>
+          <h3>
+            Ambiguity can lead to<br />
+            fear, anxeity, anger and aggression
+          </h3>
+        </section>
+        <section>
+          <h1>
+            Context ⚔️
           </h1>
         </section>
         <section>
-          <img src="graphic/es_start.jpg" class="plain" />
+          <img class="plain w-1/2" src="graphic/dialog.png" />
         </section>
         <section>
-          <img src="graphic/es_done.jpg" class="plain" />
+          <h1 class="text-5xl" style="font-size: 9em;">
+            🏔
+          </h1>
         </section>
         <section>
-          <p>
-            Only design <strong>simple facts</strong>
-          </p>
-          <p>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </p>
-          <p>
-            <strong>Behaviour</strong> over structure
-          </p>
-          <p>
-            <strong class="ddd">Ubiquitous Language</strong>
-          </p>
+          <h1>
+            🙅‍♂️ Ambiguity 🙅‍♀️
+          </h1>
         </section>
         <section>
-          <h1>Thank you 🤗</h1>
+          <h1>Thank you</h1>
           <p>
             📱 <a href="tel:+4520442127">20 44 21 27</a>
           </p>
