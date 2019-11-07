@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Copenhagen Ruby Brigade - November 2018</title>
+    <title>Tonsser - November 2019</title>
 
     <link rel="stylesheet" href="lib/css/tailwind.min.css">
 
@@ -39,12 +39,20 @@
       <div class="slides">
         <section>
           <img class="plain logo mb-8" src="graphic/zetland.jpg" />
-          <h1 class="pb-0 mb-0">Events on Rails</h1>
-          <p class="text-xs pt-0 mt-0">Applied <span class="es">Event Sourcing</span>, <span class="ddd">Domain-Driven Design</span> and <span class="cqrs">CQRS</span></p>
+          <div class="">
+            <h1 class="pb-0 mb-0">Words matter</h1>
+            <p class="text-xs pt-0 mt-0">How <span class="ddd">Domain-Driven Design</span> and <span class="es">Event Sourcing</span> helps you choose the right ones</p>
+          </div>
           <p class="text-grey text-xs font-thin mt-8">
-            by Anders Lemke <br/>
+            <span class="font-bold">Anders Lemke</span> <br/>
             Platform Architect and Lead Engineer at Zetland
           </p>
+        </section>
+        <section>
+          <img class="plain" src="graphic/intro.png" />
+        </section>
+        <section>
+          <img class="plain" src="graphic/allofus.png" />
         </section>
         <section>
           <h1>
@@ -89,17 +97,32 @@
           <img class="plain" src="graphic/allofus.png" />
         </section>
         <section>
-          <img class="plain" src="graphic/uml2.png" />
-        </section>
-        <section>
-          <h1 class="flex justify-around">
-            <span>
-              🚀
-            </span>
+          <h1 class="">
+            Application
+          </h1>
+          <h3 class="text-black">
+            vs.
+          </h3>
+          <h1 class="ddd">
+            Domain
           </h1>
         </section>
         <section>
-          <img class="plain" src="graphic/intro.png" />
+          <h1>
+            Conway's law
+          </h1>
+          <p class="fragment">
+            organizations which design systems ... are constrained to produce designs which are copies of the communication structures of these organizations.
+          </p>
+        </section>
+        <section>
+          <img src="graphic/misunderstand.png" class="plain" />
+        </section>
+        <section>
+          <img src="graphic/same.png" class="plain" />
+        </section>
+        <section>
+          <h1 class="ddd">Ubiquitous Language</h1>
         </section>
         <section>
           <h1 class="es">Domain Event</span></h1>
@@ -117,13 +140,17 @@
           </code></pre>
         </section>
         <section>
-          <img src="graphic/overview.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_post.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_es.png" class="plain" />
+          <pre><code>
+              story_revision_created.rb
+              story_approved_for_publishing.rb
+              story_published.rb
+              story_scheduled_for_publishing.rb
+              story_scheduling_cancelled.rb
+              story_sent_to_followers.rb
+              story_sent_via_push.rb
+              story_deleted.rb
+              story_unpublished.rb
+          </code></pre>
         </section>
         <section>
           <h1 class="es">Event Sourcing</span></h1>
@@ -140,148 +167,60 @@
           </ol>
         </section>
         <section>
-          <div class="flex justify-center items-center">
-            <span class="text-4xl">👉</span><img class="plain pb-10" src="graphic/table.png" />
-          </div>
-        </section>
-        <section>
-          <div class="flex justify-center items-center">
-            <img class="plain" src="graphic/stack.png" />
-          </div>
-        </section>
-        <section>
-          <img src="graphic/overview_es.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_es1.png" class="plain" />
-        </section>
-        <section>
-          <pre><code class="ruby">
-    # In aggregate_repository.rb
-    def build(aggregate_class, aggregate_id)
-      aggregate = aggregate_class.new(aggregate_id)
-      events = EventStore.load_events(
-        aggregate_class,
-        aggregate_id
-      )
-      aggregate.rebuild(events)
-    end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es2.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-        # In editor/story.rb
-        def apply_story_revision_created(event)
-          @story_content = event.story_content
-        end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es3.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-        # In editor/story.rb
-        def publish(user_id:)
-          return unless reviewed?
-
-          apply Editor::StoryPublished.new(
-            user_id: user_id,
-            story_id: @story_id,
-            story_content: @story_content,
-          )
-        end
-          </code></pre>
-        </section>
-        <section>
-          <pre><code class="ruby">
-          # In editor/story.rb
-          def apply_story_published(event)
-            @status = :published
-          end
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es4.png" class="plain" />
-        </section>
-        <section>
-          <pre><code class="ruby">
-              # In command_handler.rb
-
-              EventStore.store_events(
-                aggregate_class,
-                aggregate_id,
-                aggregate.unpublished_events
-              )
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_es5.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_queue.png" class="plain" />
-        </section>
-        <section>
-          <img class="plain" src="graphic/cqrs.png" />
-        </section>
-        <section>
-          <h1 class="cqrs">CQRS</span></h1>
-          <p>(Command Query Responsibility Segregation)</p>
-        </section>
-        <section>
-          <img src="graphic/overview_queue.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview_processors.png" class="plain" />
-        </section>
-        <section>
-          <h1 class="ddd">Bounded context</span></h1>
-        </section>
-        <section>
-          <ul style="list-style: none;">
-            <li class="mb-3">
-              ✍️ A story is something you edit <span class="ddd">(Editor)</span>
-            </li>
-            <li class="fragment mb-3">
-              👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
-            </li>
-            <li class="fragment mb-3">
-              📒 A story is something you count <span class="ddd">(Internal reporting)</span>
-            </li>
-            <li class="fragment mb-3">
-              🏞 A story is something you discover <span class="ddd">(Discover)</span>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <img src="graphic/overview_processors.png" class="plain" />
-        </section>
-        <section>
-          <p>
-            <span class="ddd">Consume:</span> A row for members 👩‍💻 
-          </p>
-          <pre><code>
-          when Editor::StoryPublished
-            Consume::Story.create(
-              story_id: event.story_id,
-              story_content: event.story_content
-            )
-          </code></pre>
-        </section>
-        <section>
-          <img src="graphic/overview_read.png" class="plain" />
-        </section>
-        <section>
-          <img src="graphic/overview.png" class="plain" />
+          <section>
+            <img src="graphic/overview.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_post.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es1.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es2.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es3.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es4.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_es5.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_queue.png" class="plain" />
+          </section>
+          <section>
+            <img class="plain" src="graphic/cqrs.png" />
+          </section>
+          <section>
+            <img src="graphic/overview_queue.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_processors.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview_read.png" class="plain" />
+          </section>
+          <section>
+            <img src="graphic/overview.png" class="plain" />
+          </section>
         </section>
         <section>
           <h1>OK, Why?</h1>
         </section>
         <section>
-          Only design <strong>simple facts</strong>
+          <p>
+            Only design <strong>simple facts</strong>
+          </p>
+
+          <p class="">
+            that are bound in time
+          </p>
         </section>
         <section>
           <section>
@@ -336,49 +275,72 @@
           </code></pre>
         </section>
         <section>
-          <img src="graphic/wedding.jpg" class="plain" />
+          <img src="graphic/wedding.png" class="plain" />
         </section>
         <section>
-          <img src="graphic/divorce.jpg" class="plain" />
+          <img src="graphic/divorce-removebg-preview.png" class="plain" />
         </section>
         <section>
           <img src="graphic/broadcast.png" class="plain" />
         </section>
         <section>
-          <section>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </section>
+          <strong class="cqrs">Decouple</strong> data change from data usage
         </section>
         <section>
-          <img src="graphic/winback.png" class="plain" />
+          <h1>
+            ☕️
+          </h1>
         </section>
         <section>
-          <img src="graphic/flatline.gif" class="plain" />
-        </section>
-        <section>
-          <h1>📈</h1>
+          <h1>
+            100.000.000
+          </h1>
         </section>
         <section>
           <h1 class="ddd">Ubiquitous Language</h1>
         </section>
         <section>
-          <img src="graphic/misunderstand.png" class="plain" />
+          <p>
+            Only design <strong>simple facts</strong>
+          </p>
+          <p>
+            <strong class="cqrs">Decouple</strong> data change from data usage
+          </p>
+          <p>
+            <strong>Behaviour</strong> over structure
+          </p>
+          <p>
+            <strong class="ddd">Ubiquitous Language</strong>
+          </p>
+        </section>
+        <section>
+          <h1 class="ddd">
+            Context matters
+          </h1>
+        </section>
+        <section>
+          <section>
+            <h1 class="ddd">Bounded context</span></h1>
+          </section>
+          <section>
+            <ul style="list-style: none;">
+              <li class="mb-3">
+                ✍️ A story is something you edit <span class="ddd">(Editor)</span>
+              </li>
+              <li class="fragment mb-3">
+                👩‍💻 A story is something you consume <span class="ddd">(Consume)</span>
+              </li>
+              <li class="fragment mb-3">
+                📒 A story is something you count <span class="ddd">(Internal reporting)</span>
+              </li>
+              <li class="fragment mb-3">
+                🏞 A story is something you discover <span class="ddd">(Discover)</span>
+              </li>
+            </ul>
+          </section>
         </section>
         <section>
           <img src="graphic/same.png" class="plain" />
-        </section>
-        <section>
-          <pre><code>
-              story_revision_created.rb
-              story_approved_for_publishing.rb
-              story_published.rb
-              story_scheduled_for_publishing.rb
-              story_scheduling_cancelled.rb
-              story_sent_to_followers.rb
-              story_sent_via_push.rb
-              story_deleted.rb
-              story_unpublished.rb
-          </code></pre>
         </section>
         <section>
           <h1>What now?</h1>
@@ -386,11 +348,11 @@
         <section>
           <h4>Challenges</h4>
           <ul>
-            <li class="fragment">Added complexity at high level</li>
-            <li class="fragment">Write some new Rails generators</li>
-            <li class="fragment">Relearn to design software</li>
-            <li class="fragment">Eventual consistency</li>
-            <li class="fragment">Evolving events over time</li>
+            <li class="">Added complexity</li>
+            <li class="">Write some new Rails generators</li>
+            <li class="">Relearn to design software</li>
+            <li class="">Eventual consistency</li>
+            <li class="">Evolving events over time</li>
           </ul>
         </section>
         <section>
@@ -444,20 +406,6 @@
         </section>
         <section>
           <img src="graphic/es_done.jpg" class="plain" />
-        </section>
-        <section>
-          <p>
-            Only design <strong>simple facts</strong>
-          </p>
-          <p>
-            <strong class="cqrs">Decouple</strong> data change from data usage
-          </p>
-          <p>
-            <strong>Behaviour</strong> over structure
-          </p>
-          <p>
-            <strong class="ddd">Ubiquitous Language</strong>
-          </p>
         </section>
         <section>
           <h1>Thank you 🤗</h1>
